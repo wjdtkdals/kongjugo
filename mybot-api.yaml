@@ -1,0 +1,84 @@
+ 
+openapi: 3.0.0
+info:
+  title: MyBot API
+  description: MyBot의 기능을 제공하는 API
+  version: 1.0.0
+  termsOfService: http://api.mybot.com/terms/
+  contact:
+    name: API Support
+    url: http://www.mybot.com/support
+    email: support@mybot.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-privacy-policy: http://www.mybot.com/privacy-policy  # 개인정보 보호 정책 URL 추가
+servers:
+  - url: http://api.mybot.com/v1
+    description: 메인 (프로덕션) 서버
+paths:
+  /users:
+    post:
+      operationId: createUser
+      summary: 새로운 사용자를 생성합니다.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '201':
+          description: 생성된 사용자 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+  /messages:
+    post:
+      operationId: sendMessage
+      summary: 메시지를 전송합니다.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                message:
+                  type: string
+      responses:
+        '200':
+          description: 전송된 메시지 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messageId:
+                    type: string
+                  userId:
+                    type: string
+                  message:
+                    type: string
+securitySchemes:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-API-Key
+security:
+  - ApiKeyAuth: []

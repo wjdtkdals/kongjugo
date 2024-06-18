@@ -1,0 +1,16 @@
+ECHO가 설정되어 있습니다.
+# Windows 시스템 파일 제외
+AppData/
+Application Data/
+Cookies/
+Documents/
+Local Settings/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Templates/
+시작 메뉴/
+.lunarclient/
+*.log
+*.tmp
